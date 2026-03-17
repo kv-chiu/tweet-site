@@ -35,3 +35,12 @@
   padding: 24px;
   color: var(--text);
 }
+
+/* Move lightbox nav buttons to bottom corners */
+.yarl__navigation_prev,
+.yarl__navigation_next {
+  top: auto;
+  bottom: 0;
+  transform: none;
+}
+

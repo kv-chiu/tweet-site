@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import Lightbox, { type Slide } from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { AlbumCard } from './AlbumCard';
+import { LightboxTweetOverlay } from './LightboxTweetOverlay';
 import '../styles/album.css';
 
 interface MediaItem {
@@ -82,6 +83,15 @@ export function AlbumView({ ids }: AlbumViewProps) {
     };
   }, [ids]);
 
+  const renderSlideHeader = useCallback(
+    ({ slide }: { slide: Slide }) => {
+      const tweetId = (slide as Slide & { tweetId?: string }).tweetId;
+      if (!tweetId) return null;
+      return <LightboxTweetOverlay tweetId={tweetId} />;
+    },
+    [],
+  );
+
   return (
     <>
       <div className="album-grid">
@@ -103,7 +113,14 @@ export function AlbumView({ ids }: AlbumViewProps) {
         open={lightboxIndex >= 0}
         index={lightboxIndex}
         close={() => setLightboxIndex(-1)}
-        slides={media.map((item) => ({ src: item.src, alt: item.alt }))}
+        slides={media.map((item) => ({
+          src: item.src,
+          alt: item.alt,
+          tweetId: item.tweetId,
+        }))}
+        render={{
+          slideHeader: renderSlideHeader,
+        }}
       />
     </>
   );
