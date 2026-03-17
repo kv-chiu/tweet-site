@@ -8,6 +8,7 @@ const defaultConfig: SiteConfig = {
   defaultView: 'waterfall',
   columns: 3,
   batchSize: 10,
+  repo: '',
 };
 
 export function useSiteConfig() {

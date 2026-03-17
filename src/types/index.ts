@@ -4,6 +4,7 @@ export interface SiteConfig {
   defaultView: ViewType;
   columns: number;
   batchSize: number;
+  repo: string; // GitHub repo, e.g. "kv-chiu/tweet-site"
 }
 
 export type ViewType = 'waterfall' | 'album';

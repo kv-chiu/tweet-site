@@ -17,7 +17,7 @@ function getInitialView(defaultView: ViewType): ViewType {
 function App() {
   const { config, loading: configLoading, error: configError } = useSiteConfig();
   const { visibleIds, hasMore, loadMore, loading: tweetsLoading, error: tweetsError } =
-    useTweetIds(config.batchSize);
+    useTweetIds(config.batchSize, config.repo);
 
   const [view, setView] = useState<ViewType>(() => getInitialView(config.defaultView));
 
