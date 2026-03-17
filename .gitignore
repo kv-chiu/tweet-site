@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Site config (use *.example.json as template)
+public/site.json
+public/tweets.json

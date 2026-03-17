@@ -1,0 +1,23 @@
+.waterfall {
+  padding: 16px;
+  column-gap: 16px;
+
+  @media (max-width: 768px) {
+    column-count: 1 !important;
+    padding: 8px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    column-count: 2 !important;
+  }
+}
+
+.tweet-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+/* Override react-tweet default max-width to fill column */
+.tweet-card [data-theme] {
+  --tweet-container-margin: 0;
+}
