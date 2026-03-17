@@ -54,13 +54,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Auth check
-  const auth = req.headers.authorization;
-  if (auth !== `Bearer ${API_SECRET}`) {
+  // Parse body (supports both application/json and text/plain)
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+
+  // Auth check via body (avoids CORS preflight from Authorization header)
+  const { secret, tweet } = body;
+  if (secret !== API_SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { tweet } = req.body;
   if (!tweet || typeof tweet !== 'string') {
     return res.status(400).json({ error: 'Missing tweet ID or URL' });
   }
