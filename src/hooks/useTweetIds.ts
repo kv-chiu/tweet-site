@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { parseTweetId } from '../utils/parseTweetId';
-import { fetchJson } from '../utils/fetchJson';
 
 async function fetchTweets(repo: string): Promise<string[]> {
   // If repo is configured, fetch from GitHub raw (avoids triggering Vercel rebuild)
@@ -8,10 +7,12 @@ async function fetchTweets(repo: string): Promise<string[]> {
     const url = `https://raw.githubusercontent.com/${repo}/main/public/tweets.json`;
     const res = await fetch(url);
     if (res.ok) return res.json();
-    // Fall through to local if GitHub fetch fails
   }
 
-  return fetchJson<string[]>('/tweets.json', 'tweets.example.json');
+  // Fallback: local file (for dev or when repo is not configured)
+  const res = await fetch('/tweets.json');
+  if (!res.ok) throw new Error('tweets.json not found');
+  return res.json();
 }
 
 export function useTweetIds(batchSize: number, repo: string) {
@@ -36,5 +37,9 @@ export function useTweetIds(batchSize: number, repo: string) {
     setVisibleCount((prev) => Math.min(prev + batchSize, allIds.length));
   }, [batchSize, allIds.length]);
 
-  return { visibleIds, hasMore, loadMore, loading, error };
+  const removeId = useCallback((id: string) => {
+    setAllIds((prev) => prev.filter((t) => t !== id));
+  }, []);
+
+  return { visibleIds, hasMore, loadMore, removeId, loading, error };
 }

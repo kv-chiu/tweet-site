@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Lightbox, { type Slide } from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { AlbumCard } from './AlbumCard';
+import { DeleteButton } from './DeleteButton';
 import { LightboxTweetOverlay } from './LightboxTweetOverlay';
 import '../styles/album.css';
 
@@ -13,6 +14,8 @@ interface MediaItem {
 
 interface AlbumViewProps {
   ids: string[];
+  secret: string;
+  onDeleted: (tweetId: string) => void;
 }
 
 /**
@@ -53,7 +56,7 @@ async function fetchTweetMedia(id: string): Promise<MediaItem[]> {
   }
 }
 
-export function AlbumView({ ids }: AlbumViewProps) {
+export function AlbumView({ ids, secret, onDeleted }: AlbumViewProps) {
   const [media, setMedia] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(-1);
@@ -96,12 +99,23 @@ export function AlbumView({ ids }: AlbumViewProps) {
     <>
       <div className="album-grid">
         {media.map((item, i) => (
-          <AlbumCard
-            key={`${item.tweetId}-${item.src}`}
-            src={item.src}
-            alt={item.alt}
-            onClick={() => setLightboxIndex(i)}
-          />
+          <div key={`${item.tweetId}-${item.src}`} style={{ position: 'relative' }}>
+            {secret && (
+              <DeleteButton
+                tweetId={item.tweetId}
+                secret={secret}
+                onDeleted={(id) => {
+                  setMedia((prev) => prev.filter((m) => m.tweetId !== id));
+                  onDeleted(id);
+                }}
+              />
+            )}
+            <AlbumCard
+              src={item.src}
+              alt={item.alt}
+              onClick={() => setLightboxIndex(i)}
+            />
+          </div>
         ))}
         {loading && <div className="album-loading">Loading images...</div>}
         {!loading && media.length === 0 && (

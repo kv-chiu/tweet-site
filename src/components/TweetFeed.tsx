@@ -9,15 +9,17 @@ interface TweetFeedProps {
   columns: number;
   hasMore: boolean;
   onLoadMore: () => void;
+  secret: string;
+  onDeleted: (tweetId: string) => void;
 }
 
-export function TweetFeed({ ids, view, columns, hasMore, onLoadMore }: TweetFeedProps) {
+export function TweetFeed({ ids, view, columns, hasMore, onLoadMore, secret, onDeleted }: TweetFeedProps) {
   return (
     <main className="tweet-feed">
       {view === 'waterfall' ? (
-        <WaterfallView ids={ids} columns={columns} />
+        <WaterfallView ids={ids} columns={columns} secret={secret} onDeleted={onDeleted} />
       ) : (
-        <AlbumView ids={ids} />
+        <AlbumView ids={ids} secret={secret} onDeleted={onDeleted} />
       )}
       <LoadMoreTrigger onLoadMore={onLoadMore} hasMore={hasMore} />
     </main>

@@ -1,0 +1,46 @@
+.delete-btn-wrap {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  display: flex;
+  gap: 4px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.delete-btn.danger {
+  background: #ef4444;
+}
+
+.delete-btn.danger:hover {
+  background: #dc2626;
+}
+
+.delete-btn.cancel {
+  background: rgba(100, 100, 100, 0.6);
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

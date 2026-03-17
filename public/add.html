@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Tweet</title>
+<title>Tweet Manager</title>
 <style>
   * { margin: 0; box-sizing: border-box; }
   body {
@@ -18,6 +18,7 @@
   .detail { font-size: 14px; color: #9ca3af; word-break: break-all; }
   .success .status { color: #22c55e; }
   .error .status { color: #ef4444; }
+  .removed .status { color: #f59e0b; }
   .spinner {
     width: 32px; height: 32px; border: 3px solid #2e303a; border-top-color: #c084fc;
     border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
@@ -28,7 +29,7 @@
 <body>
 <div class="card" id="card">
   <div class="spinner" id="spinner"></div>
-  <div class="status" id="status">Adding tweet...</div>
+  <div class="status" id="status">Processing...</div>
   <div class="detail" id="detail"></div>
 </div>
 <script>
@@ -41,12 +42,15 @@
   const params = new URLSearchParams(location.search);
   const tweet = params.get('tweet');
   const secret = params.get('secret');
+  const action = params.get('action') || 'add';
+
+  status.textContent = action === 'remove' ? 'Removing tweet...' : 'Adding tweet...';
 
   if (!tweet || !secret) {
     spinner.remove();
     card.className = 'card error';
     status.textContent = 'Missing parameters';
-    detail.textContent = 'Usage: ?tweet=URL&secret=YOUR_SECRET';
+    detail.textContent = 'Usage: ?tweet=URL&secret=SECRET&action=add|remove';
     return;
   }
 
@@ -56,7 +60,7 @@
     const res = await fetch('/api/add-tweet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret, tweet }),
+      body: JSON.stringify({ secret, tweet, action }),
     });
     const data = await res.json();
     spinner.remove();
@@ -65,7 +69,7 @@
       card.className = 'card error';
       status.textContent = data.error;
     } else {
-      card.className = 'card success';
+      card.className = data.message === 'Removed' ? 'card removed' : 'card success';
       status.textContent = data.message + ' ' + data.tweetId;
     }
   } catch (e) {
@@ -75,7 +79,6 @@
     detail.textContent = e.message;
   }
 
-  // Auto close after 2s
   setTimeout(() => window.close(), 2000);
 })();
 </script>

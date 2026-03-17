@@ -13,6 +13,7 @@
 }
 
 .tweet-card {
+  position: relative;
   break-inside: avoid;
   margin-bottom: 16px;
 }

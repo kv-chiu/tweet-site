@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSiteConfig } from './hooks/useSiteConfig';
 import { useTweetIds } from './hooks/useTweetIds';
+import { useAdminMode } from './hooks/useAdminMode';
 import { Header } from './components/Header';
 import { TweetFeed } from './components/TweetFeed';
 import type { ViewType } from './types';
@@ -16,10 +17,15 @@ function getInitialView(defaultView: ViewType): ViewType {
 
 function App() {
   const { config, loading: configLoading, error: configError } = useSiteConfig();
-  const { visibleIds, hasMore, loadMore, loading: tweetsLoading, error: tweetsError } =
+  const { visibleIds, hasMore, loadMore, removeId, loading: tweetsLoading, error: tweetsError } =
     useTweetIds(config.batchSize, config.repo);
+  const secret = useAdminMode();
 
   const [view, setView] = useState<ViewType>(() => getInitialView(config.defaultView));
+
+  const handleDeleted = useCallback((tweetId: string) => {
+    removeId(tweetId);
+  }, [removeId]);
 
   const handleViewChange = (newView: ViewType) => {
     setView(newView);
@@ -48,6 +54,8 @@ function App() {
         columns={config.columns}
         hasMore={hasMore}
         onLoadMore={loadMore}
+        secret={secret}
+        onDeleted={handleDeleted}
       />
     </>
   );

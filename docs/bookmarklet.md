@@ -11,7 +11,7 @@
 
 ## 安装书签
 
-创建一个新书签，将下面的代码作为 URL（替换 `YOUR_SITE` 和 `YOUR_SECRET`）：
+创建书签，替换 `YOUR_SITE` 和 `YOUR_SECRET`：
 
 ```
 javascript:void(window.open('https://YOUR_SITE.vercel.app/add.html?secret=YOUR_SECRET&tweet='+encodeURIComponent(location.href),'_blank','width=420,height=200'))
@@ -19,12 +19,9 @@ javascript:void(window.open('https://YOUR_SITE.vercel.app/add.html?secret=YOUR_S
 
 ## 使用
 
-1. 在推特/X 上打开一条推文
-2. 点击书签栏的书签
-3. 右上角弹出 toast：
-   - 绿色 "Added xxxx" — 添加成功
-   - 红色 — 显示具体错误信息
-4. 刷新站点即可看到新推文（GitHub raw 有 ~5 分钟 CDN 缓存）
+**添加推文：** 在推特/X 上打开一条推文 → 点击书签 → 弹窗显示绿色 "Added" → 2 秒后自动关闭
+
+**删除推文：** 访问 `https://YOUR_SITE.vercel.app?secret=YOUR_SECRET` 进入管理模式 → 点击推文上的 ✕ 按钮删除
 
 ## 排查问题
 
