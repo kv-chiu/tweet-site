@@ -13,7 +13,7 @@ export function TweetCard({ id, secret, onDeleted }: TweetCardProps) {
     <div className="tweet-card">
       {secret && <DeleteButton tweetId={id} secret={secret} onDeleted={onDeleted} />}
       <LazyEmbed height={350}>
-        <XEmbed url={`https://x.com/i/status/${id}`} />
+        <XEmbed url={`https://x.com/i/status/${id}`} width="100%" />
       </LazyEmbed>
     </div>
   );

@@ -18,3 +18,9 @@
   break-inside: avoid;
   margin-bottom: 16px;
 }
+
+.tweet-card .lazy-embed,
+.embed-card .lazy-embed {
+  transform: scale(0.95);
+  transform-origin: top center;
+}
