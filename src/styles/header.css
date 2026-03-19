@@ -1,29 +1,53 @@
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 24px 32px;
-  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  box-sizing: border-box;
+  /* Wood-grain gradient with transparency */
+  background:
+    linear-gradient(90deg,
+      #D4B89680 0%, #C8A88280 15%, #D6BC9A80 25%, #C9AA8480 35%,
+      #D2B59080 45%, #CBAD8880 55%, #D8BF9E80 65%, #C7A88080 75%,
+      #D3B79480 85%, #CCAF8A80 100%
+    );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
   @media (max-width: 640px) {
-    padding: 16px 20px;
-    flex-direction: column;
-    gap: 12px;
+    padding: 12px 16px;
   }
 }
 
-.site-header-text h1 {
-  font-size: 28px;
+.site-header-brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.site-header-brand-text h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: italic;
   margin: 0;
-  letter-spacing: -0.5px;
-
-  @media (max-width: 640px) {
-    font-size: 22px;
-  }
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  line-height: 1;
+  white-space: nowrap;
 }
 
-.site-header-text p {
-  color: var(--text);
-  font-size: 14px;
-  margin-top: 4px;
+.site-header-brand-text p {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 3px;
+  line-height: 1;
+  white-space: nowrap;
 }

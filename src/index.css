@@ -1,41 +1,39 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  /* V3 Warm wood-tone palette */
+  --bg-page: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-surface: #EDE8E1;
+  --bg-muted: #E8E2DA;
+  --text-primary: #2D2A26;
+  --text-secondary: #8A8580;
+  --text-muted: #B5AFA8;
+  --text-body: #5A5650;
+  --accent: #D4874D;
+  --accent-light: rgba(212, 135, 77, 0.12);
+  --border: #E3DDD5;
+  --border-subtle: #EDE8E1;
+  --radius-card: 16px;
+  --radius-button: 20px;
+  --radius-input: 24px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --heading: 'Fraunces', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Header height for sticky offset */
+  --header-height: 64px;
 
   font: 16px/1.5 var(--sans);
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text-body);
+  background: var(--bg-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-  }
-}
-
 #root {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   min-height: 100svh;
   display: flex;
@@ -47,9 +45,8 @@ body {
   margin: 0;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: var(--heading);
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--text-primary);
 }

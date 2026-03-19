@@ -1,10 +1,14 @@
 .waterfall {
-  padding: 16px;
+  padding: 12px 10px;
   column-gap: 16px;
+  max-width: 1698px; /* 550px * 3 columns + 16px * 2 gaps + 10px * 2 padding */
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     column-count: 1 !important;
-    padding: 8px;
+    padding: 8px 12px;
+    max-width: 550px;
+    margin: 0 auto;
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -17,10 +21,4 @@
   position: relative;
   break-inside: avoid;
   margin-bottom: 16px;
-}
-
-.tweet-card .lazy-embed,
-.embed-card .lazy-embed {
-  transform: scale(0.95);
-  transform-origin: top center;
 }

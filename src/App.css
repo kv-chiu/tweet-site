@@ -1,12 +1,13 @@
 .tweet-feed {
   flex: 1;
+  padding-top: 16px;
 }
 
 .load-more-trigger {
   display: flex;
   justify-content: center;
   padding: 24px;
-  color: var(--text);
+  color: var(--text-muted);
   font-size: 14px;
 }
 
@@ -15,7 +16,7 @@
   align-items: center;
   justify-content: center;
   min-height: 200px;
-  color: var(--text);
+  color: var(--text-secondary);
   font-size: 16px;
 }
 
