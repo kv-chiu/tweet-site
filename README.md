@@ -1,6 +1,6 @@
-# tweet-site
+# FanGallery
 
-开箱即用的推文收藏站。收藏和浏览推特 / Instagram 上的精美图片，支持瀑布流视图，一键部署到 Vercel。
+把散落在社交媒体上的高质量图片整理成独立的图片站，让粉丝像刷相册一样沉浸式浏览。支持 Twitter / Instagram，瀑布流布局，一键部署到 Vercel。
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkv-chiu%2Ftweet-site)
 

@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-tweet-site — 开箱即用的推文收藏站。用户可以收藏和浏览推特 / Instagram 上的精美图片（明星、coser 等），支持快速部署到云服务。
+FanGallery — 社交媒体图片展。把散落在 Twitter、Instagram 等平台上的高质量图片整理成独立的图片站，让粉丝沉浸式浏览。
 
-核心技术：react-social-media-embed 库用于嵌入和展示推文与 Instagram 帖子。
+核心技术：react-social-media-embed 库用于嵌入和展示 Twitter 推文与 Instagram 帖子。
 
-目标用户：喜欢收藏推特图片的网民、明星粉丝、coser 粉丝。
+目标用户：追星粉丝、coser 粉丝、喜欢收藏社交媒体图片的人。
 
-纯前端静态站点，无后端。
+纯前端静态站点，数据存储在 Git 仓库的 data 分支中。
 
 Licensed under MIT (Kelvin Chiu, 2026).
 

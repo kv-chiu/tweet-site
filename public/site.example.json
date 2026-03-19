@@ -1,6 +1,6 @@
 {
-  "title": "Tweet Collection",
-  "description": "收藏精美推文",
+  "title": "FanGallery",
+  "description": "社交媒体图片展，沉浸式浏览你收藏的精美图片",
   "columns": 3,
   "batchSize": 10,
   "repo": "kv-chiu/tweet-site"
