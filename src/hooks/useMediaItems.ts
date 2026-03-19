@@ -4,7 +4,7 @@ import type { MediaItem } from '../types';
 
 async function fetchData(repo: string): Promise<MediaItem[]> {
   if (repo) {
-    const url = `https://raw.githubusercontent.com/${repo}/main/public/data.json`;
+    const url = `https://raw.githubusercontent.com/${repo}/data/public/data.json`;
     const res = await fetch(url);
     if (res.ok) return res.json();
   }

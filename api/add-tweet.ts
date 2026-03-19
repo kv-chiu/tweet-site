@@ -3,6 +3,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 const GITHUB_REPO = process.env.GITHUB_REPO!; // e.g. "kv-chiu/tweet-site"
 const DATA_FILE = 'public/data.json';
+const DATA_BRANCH = 'data';
 const API_SECRET = process.env.API_SECRET!;
 
 async function githubApi(path: string, options: RequestInit = {}) {
@@ -63,7 +64,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const [owner, repo] = GITHUB_REPO.split('/');
-    const fileData = await githubApi(`/repos/${owner}/${repo}/contents/${DATA_FILE}`);
+    const fileData = await githubApi(`/repos/${owner}/${repo}/contents/${DATA_FILE}?ref=${DATA_BRANCH}`);
     const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
     const items: { type: string; id: string }[] = JSON.parse(content);
 
@@ -90,7 +91,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     await githubApi(`/repos/${owner}/${repo}/contents/${DATA_FILE}`, {
       method: 'PUT',
-      body: JSON.stringify({ message, content: newContent, sha: fileData.sha }),
+      body: JSON.stringify({ message, content: newContent, sha: fileData.sha, branch: DATA_BRANCH }),
     });
 
     return res.status(200).json({
