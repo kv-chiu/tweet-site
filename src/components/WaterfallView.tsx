@@ -8,6 +8,7 @@ interface WaterfallViewProps {
   items: MediaItem[];
   columns: number;
   secret: string;
+  verified: boolean;
   onDeleted: (id: string) => void;
 }
 
@@ -37,15 +38,15 @@ function useColumns(items: MediaItem[], columns: number): MediaItem[][] {
   }, [items, columns]);
 }
 
-function renderCard(item: MediaItem, secret: string, onDeleted: (id: string) => void) {
+function renderCard(item: MediaItem, secret: string, verified: boolean, onDeleted: (id: string) => void) {
   return item.type === 'instagram' ? (
-    <InstagramCard key={`ig-${item.id}`} shortcode={item.id} secret={secret} onDeleted={onDeleted} />
+    <InstagramCard key={`ig-${item.id}`} shortcode={item.id} secret={secret} verified={verified} onDeleted={onDeleted} />
   ) : (
-    <TweetCard key={item.id} id={item.id} secret={secret} onDeleted={onDeleted} />
+    <TweetCard key={item.id} id={item.id} secret={secret} verified={verified} onDeleted={onDeleted} />
   );
 }
 
-export function WaterfallView({ items, columns: maxColumns, secret, onDeleted }: WaterfallViewProps) {
+export function WaterfallView({ items, columns: maxColumns, secret, verified, onDeleted }: WaterfallViewProps) {
   const columns = useResponsiveColumns(maxColumns);
   const cols = useColumns(items, columns);
 
@@ -53,7 +54,7 @@ export function WaterfallView({ items, columns: maxColumns, secret, onDeleted }:
     <div className="waterfall">
       {cols.map((colItems, colIndex) => (
         <div className="waterfall-column" key={colIndex}>
-          {colItems.map((item) => renderCard(item, secret, onDeleted))}
+          {colItems.map((item) => renderCard(item, secret, verified, onDeleted))}
         </div>
       ))}
     </div>

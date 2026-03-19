@@ -5,6 +5,7 @@ import '../styles/tweet-fallback.css';
 interface TweetCardProps {
   id: string;
   secret: string;
+  verified: boolean;
   onDeleted: (id: string) => void;
 }
 
@@ -16,23 +17,23 @@ function TweetFallback({ id }: { id: string }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span className="tweet-fallback-icon">𝕏</span>
+      <span className="tweet-fallback-icon">{'\ud835\udd4f'}</span>
       <span className="tweet-fallback-text">View on X</span>
     </a>
   );
 }
 
-export function TweetCard({ id, secret, onDeleted }: TweetCardProps) {
+export function TweetCard({ id, secret, verified, onDeleted }: TweetCardProps) {
   return (
     <div className="tweet-card">
-      {secret && <DeleteButton tweetId={id} secret={secret} onDeleted={onDeleted} />}
+      {verified && <DeleteButton tweetId={id} secret={secret} onDeleted={onDeleted} />}
       <Tweet
         id={id}
         components={{
           TweetNotFound: () => <TweetFallback id={id} />,
         }}
       />
-      {secret && <div className="tweet-card-id">{id}</div>}
+      {verified && <div className="tweet-card-id">{id}</div>}
     </div>
   );
 }

@@ -10,7 +10,7 @@ function App() {
   const { config, loading: configLoading, error: configError } = useSiteConfig();
   const { visibleItems, hasMore, loadMore, removeItem, loading: dataLoading, error: dataError } =
     useMediaItems(config.batchSize, config.repo);
-  const secret = useAdminMode();
+  const { secret, verified } = useAdminMode();
 
   const handleDeleted = useCallback((id: string) => {
     removeItem(id);
@@ -36,6 +36,7 @@ function App() {
         hasMore={hasMore}
         onLoadMore={loadMore}
         secret={secret}
+        verified={verified}
         onDeleted={handleDeleted}
       />
     </>

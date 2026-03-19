@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { authorize } from './_auth';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 const GITHUB_REPO = process.env.GITHUB_REPO!; // e.g. "kv-chiu/tweet-site"
 const DATA_FILE = 'public/data.json';
 const DATA_BRANCH = 'data';
-const API_SECRET = process.env.API_SECRET!;
 
 async function githubApi(path: string, options: RequestInit = {}) {
   const res = await fetch(`https://api.github.com${path}`, {
@@ -42,20 +42,15 @@ function parseTweetId(input: string): string {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  const body = authorize(req, res);
+  if (!body) return;
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  const { tweet, action = 'add', type = 'tweet' } = body as {
+    tweet?: string;
+    action?: string;
+    type?: string;
+  };
 
-  let body = req.body;
-  if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch { body = {}; }
-  }
-
-  const { secret, tweet, action = 'add', type = 'tweet' } = body;
-  if (secret !== API_SECRET) return res.status(401).json({ error: 'Unauthorized' });
   if (!tweet || typeof tweet !== 'string') return res.status(400).json({ error: 'Missing ID or URL' });
   if (action !== 'add' && action !== 'remove') return res.status(400).json({ error: 'Invalid action' });
   if (type !== 'tweet' && type !== 'instagram') return res.status(400).json({ error: 'Invalid type' });
