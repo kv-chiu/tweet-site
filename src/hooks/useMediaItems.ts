@@ -2,8 +2,21 @@ import { useCallback, useEffect, useState } from 'react';
 import { parseTweetId } from '../utils/parseTweetId';
 import type { MediaItem } from '../types';
 
+function getCustomDataUrl(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('data');
+}
+
 async function fetchData(repo: string): Promise<MediaItem[]> {
-  // Try GitHub raw (production)
+  // Priority 1: custom data source via ?data=<url>
+  const customUrl = getCustomDataUrl();
+  if (customUrl) {
+    const res = await fetch(customUrl);
+    if (res.ok) return res.json();
+    throw new Error(`Failed to fetch custom data source: ${res.status}`);
+  }
+
+  // Priority 2: GitHub raw (production)
   if (repo) {
     try {
       const url = `https://raw.githubusercontent.com/${repo}/data/public/data.json`;
@@ -14,7 +27,7 @@ async function fetchData(repo: string): Promise<MediaItem[]> {
     }
   }
 
-  // Try local file (dev)
+  // Priority 3: local file (dev)
   try {
     const res = await fetch('/data.json');
     const contentType = res.headers.get('content-type') ?? '';
