@@ -10,7 +10,10 @@ async function fetchData(repo: string): Promise<MediaItem[]> {
   }
 
   const res = await fetch('/data.json');
-  if (!res.ok) throw new Error('data.json not found');
+  const contentType = res.headers.get('content-type') ?? '';
+  if (!res.ok || !contentType.includes('application/json')) {
+    throw new Error('data.json not found');
+  }
   return res.json();
 }
 
