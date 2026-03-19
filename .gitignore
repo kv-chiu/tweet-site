@@ -25,3 +25,6 @@ dist-ssr
 
 # Site config (use *.example.json as template)
 public/site.json
+
+# Claude Code memory
+.claude/
