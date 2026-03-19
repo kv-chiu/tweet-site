@@ -7,7 +7,7 @@
    - `GITHUB_REPO` — 仓库全名，如 `kv-chiu/tweet-site`
    - `API_SECRET` — 自定义密钥，用于验证请求
 
-2. 确保仓库中已有 `public/tweets.json` 文件（否则 API 无法读取）。
+2. 确保仓库中已有 `public/data.json` 文件（否则 API 无法读取）。
 
 ## 安装书签
 
@@ -27,5 +27,5 @@ javascript:void(window.open('https://YOUR_SITE.vercel.app/add.html?secret=YOUR_S
 
 - 确认在推文详情页使用（URL 包含 `/status/数字`）
 - 确认 Vercel 环境变量 `GITHUB_TOKEN`、`GITHUB_REPO`、`API_SECRET` 已设置
-- 确认仓库中存在 `public/tweets.json`
+- 确认仓库中存在 `public/data.json`
 - 如果提示 "Unauthorized"，检查 `API_SECRET` 是否与 Vercel 环境变量一致

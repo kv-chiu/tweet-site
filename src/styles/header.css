@@ -27,35 +27,3 @@
   font-size: 14px;
   margin-top: 4px;
 }
-
-.view-toggle {
-  display: flex;
-  gap: 4px;
-  background: var(--code-bg);
-  border-radius: 8px;
-  padding: 4px;
-}
-
-.view-toggle button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.view-toggle button:hover {
-  color: var(--text-h);
-}
-
-.view-toggle button.active {
-  background: var(--bg);
-  color: var(--text-h);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}

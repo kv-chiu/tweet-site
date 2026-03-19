@@ -1,26 +1,20 @@
-import type { ViewType } from '../types';
+import type { MediaItem } from '../types';
 import { WaterfallView } from './WaterfallView';
-import { AlbumView } from './AlbumView';
 import { LoadMoreTrigger } from './LoadMoreTrigger';
 
 interface TweetFeedProps {
-  ids: string[];
-  view: ViewType;
+  items: MediaItem[];
   columns: number;
   hasMore: boolean;
   onLoadMore: () => void;
   secret: string;
-  onDeleted: (tweetId: string) => void;
+  onDeleted: (id: string) => void;
 }
 
-export function TweetFeed({ ids, view, columns, hasMore, onLoadMore, secret, onDeleted }: TweetFeedProps) {
+export function TweetFeed({ items, columns, hasMore, onLoadMore, secret, onDeleted }: TweetFeedProps) {
   return (
     <main className="tweet-feed">
-      {view === 'waterfall' ? (
-        <WaterfallView ids={ids} columns={columns} secret={secret} onDeleted={onDeleted} />
-      ) : (
-        <AlbumView ids={ids} secret={secret} onDeleted={onDeleted} />
-      )}
+      <WaterfallView items={items} columns={columns} secret={secret} onDeleted={onDeleted} />
       <LoadMoreTrigger onLoadMore={onLoadMore} hasMore={hasMore} />
     </main>
   );

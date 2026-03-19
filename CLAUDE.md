@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-tweet-site — 开箱即用的推文收藏站。用户可以收藏和浏览推特上的精美图片（明星、coser 等），支持快速部署到云服务。
+tweet-site — 开箱即用的推文收藏站。用户可以收藏和浏览推特 / Instagram 上的精美图片（明星、coser 等），支持快速部署到云服务。
 
-核心技术：react-tweet 库用于嵌入和展示推文。
+核心技术：react-social-media-embed 库用于嵌入和展示推文与 Instagram 帖子。
 
 目标用户：喜欢收藏推特图片的网民、明星粉丝、coser 粉丝。
 

@@ -5,7 +5,6 @@ import { fetchJson } from '../utils/fetchJson';
 const defaultConfig: SiteConfig = {
   title: 'Tweet Collection',
   description: '',
-  defaultView: 'waterfall',
   columns: 3,
   batchSize: 10,
   repo: '',

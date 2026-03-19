@@ -1,7 +1,6 @@
 {
   "title": "Tweet Collection",
   "description": "收藏精美推文",
-  "defaultView": "waterfall",
   "columns": 3,
   "batchSize": 10,
   "repo": "kv-chiu/tweet-site"

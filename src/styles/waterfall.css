@@ -12,13 +12,9 @@
   }
 }
 
-.tweet-card {
+.tweet-card,
+.embed-card {
   position: relative;
   break-inside: avoid;
   margin-bottom: 16px;
-}
-
-/* Override react-tweet default max-width to fill column */
-.tweet-card [data-theme] {
-  --tweet-container-margin: 0;
 }
