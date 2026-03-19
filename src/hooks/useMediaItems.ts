@@ -28,6 +28,8 @@ export function useMediaItems(batchSize: number, repo: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     fetchData(repo)
       .then((data) => setAllItems(data.map(normalizeItem)))
       .catch((err) => setError(err.message))
