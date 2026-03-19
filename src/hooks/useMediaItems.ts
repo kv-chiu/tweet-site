@@ -3,18 +3,29 @@ import { parseTweetId } from '../utils/parseTweetId';
 import type { MediaItem } from '../types';
 
 async function fetchData(repo: string): Promise<MediaItem[]> {
+  // Try GitHub raw (production)
   if (repo) {
-    const url = `https://raw.githubusercontent.com/${repo}/data/public/data.json`;
-    const res = await fetch(url);
-    if (res.ok) return res.json();
+    try {
+      const url = `https://raw.githubusercontent.com/${repo}/data/public/data.json`;
+      const res = await fetch(url);
+      if (res.ok) return res.json();
+    } catch {
+      // network error, fall through to local
+    }
   }
 
-  const res = await fetch('/data.json');
-  const contentType = res.headers.get('content-type') ?? '';
-  if (!res.ok || !contentType.includes('application/json')) {
-    throw new Error('data.json not found');
+  // Try local file (dev)
+  try {
+    const res = await fetch('/data.json');
+    const contentType = res.headers.get('content-type') ?? '';
+    if (res.ok && contentType.includes('application/json')) {
+      return res.json();
+    }
+  } catch {
+    // ignore
   }
-  return res.json();
+
+  return [];
 }
 
 function normalizeItem(item: MediaItem): MediaItem {
@@ -31,7 +42,6 @@ export function useMediaItems(batchSize: number, repo: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!repo) return;
     setLoading(true);
     setError(null);
     fetchData(repo)

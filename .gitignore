@@ -25,6 +25,7 @@ dist-ssr
 
 # Site config (use *.example.json as template)
 public/site.json
+public/data.json
 
 # Claude Code config
 .claude/
