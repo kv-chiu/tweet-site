@@ -1,17 +1,5 @@
 :root {
-  /* V3 Warm wood-tone palette */
-  --bg-page: #F5F0EB;
-  --bg-card: #FFFFFF;
-  --bg-surface: #EDE8E1;
-  --bg-muted: #E8E2DA;
-  --text-primary: #2D2A26;
-  --text-secondary: #8A8580;
-  --text-muted: #B5AFA8;
-  --text-body: #5A5650;
-  --accent: #D4874D;
-  --accent-light: rgba(212, 135, 77, 0.12);
-  --border: #E3DDD5;
-  --border-subtle: #EDE8E1;
+  /* Shared tokens */
   --radius-card: 16px;
   --radius-button: 20px;
   --radius-input: 24px;
@@ -24,12 +12,70 @@
   --header-height: 64px;
 
   font: 16px/1.5 var(--sans);
-  color: var(--text-body);
-  background: var(--bg-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light theme (default) */
+:root,
+:root[data-theme='light'] {
+  --bg-page: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-surface: #EDE8E1;
+  --bg-muted: #E8E2DA;
+  --text-primary: #2D2A26;
+  --text-secondary: #8A8580;
+  --text-muted: #B5AFA8;
+  --text-body: #5A5650;
+  --accent: #D4874D;
+  --accent-light: rgba(212, 135, 77, 0.12);
+  --border: #E3DDD5;
+  --border-subtle: #EDE8E1;
+  color-scheme: light;
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* Dark theme */
+:root[data-theme='dark'] {
+  --bg-page: #1a1816;
+  --bg-card: #262220;
+  --bg-surface: #2e2a27;
+  --bg-muted: #3a3530;
+  --text-primary: #ede5dc;
+  --text-secondary: #9a9088;
+  --text-muted: #6b6058;
+  --text-body: #c4b9ad;
+  --accent: #e0995c;
+  --accent-light: rgba(224, 153, 92, 0.15);
+  --border: #3e3830;
+  --border-subtle: #332e28;
+  color-scheme: dark;
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* Follow system preference when no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-page: #1a1816;
+    --bg-card: #262220;
+    --bg-surface: #2e2a27;
+    --bg-muted: #3a3530;
+    --text-primary: #ede5dc;
+    --text-secondary: #9a9088;
+    --text-muted: #6b6058;
+    --text-body: #c4b9ad;
+    --accent: #e0995c;
+    --accent-light: rgba(224, 153, 92, 0.15);
+    --border: #3e3830;
+    --border-subtle: #332e28;
+    color-scheme: dark;
+    color: var(--text-body);
+    background: var(--bg-page);
+  }
 }
 
 #root {

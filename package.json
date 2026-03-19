@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-social-media-embed": "^2.5.18"
+    "react-social-media-embed": "^2.5.18",
+    "react-tweet": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

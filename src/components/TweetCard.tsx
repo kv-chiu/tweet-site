@@ -1,6 +1,6 @@
-import { XEmbed } from 'react-social-media-embed';
+import { Tweet } from 'react-tweet';
 import { DeleteButton } from './DeleteButton';
-import { LazyEmbed } from './LazyEmbed';
+import '../styles/tweet-fallback.css';
 
 interface TweetCardProps {
   id: string;
@@ -8,13 +8,31 @@ interface TweetCardProps {
   onDeleted: (id: string) => void;
 }
 
+function TweetFallback({ id }: { id: string }) {
+  return (
+    <a
+      className="tweet-fallback"
+      href={`https://x.com/i/status/${id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="tweet-fallback-icon">𝕏</span>
+      <span className="tweet-fallback-text">View on X</span>
+    </a>
+  );
+}
+
 export function TweetCard({ id, secret, onDeleted }: TweetCardProps) {
   return (
     <div className="tweet-card">
       {secret && <DeleteButton tweetId={id} secret={secret} onDeleted={onDeleted} />}
-      <LazyEmbed height={350}>
-        <XEmbed url={`https://x.com/i/status/${id}`} width="100%" />
-      </LazyEmbed>
+      <Tweet
+        id={id}
+        components={{
+          TweetNotFound: () => <TweetFallback id={id} />,
+        }}
+      />
+      {secret && <div className="tweet-card-id">{id}</div>}
     </div>
   );
 }

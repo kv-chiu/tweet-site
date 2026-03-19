@@ -1,19 +1,19 @@
 .waterfall {
+  display: flex;
+  gap: 16px;
   padding: 12px 10px;
-  column-gap: 16px;
   max-width: 1698px; /* 550px * 3 columns + 16px * 2 gaps + 10px * 2 padding */
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    column-count: 1 !important;
     padding: 8px 12px;
     max-width: 550px;
-    margin: 0 auto;
   }
+}
 
-  @media (min-width: 769px) and (max-width: 1024px) {
-    column-count: 2 !important;
-  }
+.waterfall-column {
+  flex: 1;
+  min-width: 0;
 }
 
 .tweet-card,
@@ -21,4 +21,12 @@
   position: relative;
   break-inside: avoid;
   margin-bottom: 16px;
+}
+
+.tweet-card-id {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2px 0 4px;
+  user-select: all;
 }

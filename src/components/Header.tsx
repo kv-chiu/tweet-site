@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTheme } from '../hooks/useTheme';
 import '../styles/header.css';
 
 const slogans = [
@@ -16,6 +17,11 @@ interface HeaderProps {
 
 export function Header({ title }: HeaderProps) {
   const slogan = useMemo(() => slogans[Math.floor(Math.random() * slogans.length)], []);
+  const { resolved, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(resolved === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <header className="site-header">
@@ -25,6 +31,9 @@ export function Header({ title }: HeaderProps) {
           <p>{slogan}</p>
         </div>
       </div>
+      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+        {resolved === 'light' ? '\u263E' : '\u2600'}
+      </button>
     </header>
   );
 }

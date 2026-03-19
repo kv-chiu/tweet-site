@@ -1,0 +1,29 @@
+.tweet-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.tweet-fallback:hover {
+  background: var(--bg-surface);
+  border-color: var(--accent);
+}
+
+.tweet-fallback-icon {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tweet-fallback-text {
+  font-size: 14px;
+  font-weight: 500;
+}
